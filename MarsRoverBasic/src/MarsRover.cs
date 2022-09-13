@@ -4,6 +4,10 @@ public class MarsRover
 {
     public string Execute(string command)
     {
-        return "0:0:N";
+        if (String.IsNullOrEmpty(command))
+        {
+            return "0:0:N";
+        }
+        return "0:0:E";
     }
 }
