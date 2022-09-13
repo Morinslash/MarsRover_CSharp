@@ -1,6 +1,4 @@
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
 using Xunit;
-using Xunit.Sdk;
 
 namespace MarsRoverBasic.tests;
 
@@ -15,12 +13,14 @@ public class MarsRoverShould
     }
 
     [Theory]
-    [InlineData("L", "0:0:E")]
+    [InlineData("L", "0:0:W")]
     [InlineData("LL", "0:0:S")]
-    [InlineData("LLL", "0:0:W")]
+    [InlineData("LLL", "0:0:E")]
     public void Return_Navigation_Data_Matching_Expected_Left_Turns(string command, string output)
     {
         var marsRover = new MarsRover();
         Assert.Equal(output, marsRover.Execute(command));
     }
+    
+    
 }

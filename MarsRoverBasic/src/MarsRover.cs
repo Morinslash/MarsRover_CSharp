@@ -1,23 +1,34 @@
+using System.Linq;
+
 namespace MarsRoverBasic;
 
 public class MarsRover
 {
+    public MarsRover()
+    {
+        Direction = "N";
+    }
+
+    public string Direction { get; private set; }
+
     public string Execute(string command)
     {
-        if (command.Equals("L"))
+        foreach (var symbol in command)
         {
-            return "0:0:E";
+            TurnLeft();
         }
 
-        if (command.Equals("LL"))
-        {
-            return "0:0:S";
-        }
+        return $"0:0:{Direction}";
+    }
 
-        if (command.Equals("LLL"))
+    private void TurnLeft()
+    {
+        Direction = Direction switch
         {
-            return "0:0:W";
-        }
-        return "0:0:N";
+            "N" => "W",
+            "W" => "S",
+            "S" => "E",
+            _ => "N"
+        };
     }
 }
