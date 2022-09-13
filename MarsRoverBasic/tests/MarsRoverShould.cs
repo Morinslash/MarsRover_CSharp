@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
 using Xunit;
+using Xunit.Sdk;
 
 namespace MarsRoverBasic.tests;
 
@@ -13,11 +14,13 @@ public class MarsRoverShould
         Assert.Equal(expectedOutput, sut.Execute(string.Empty));
     }
 
-    [Fact]
-    public void Return_0_0_E_When_Command_Is_L()
+    [Theory]
+    [InlineData("L", "0:0:E")]
+    [InlineData("LL", "0:0:S")]
+    [InlineData("LLL", "0:0:W")]
+    public void Return_Navigation_Data_Matching_Expected_Left_Turns(string command, string output)
     {
-        var expectedOutput = "0:0:E";
         var marsRover = new MarsRover();
-        Assert.Equal(expectedOutput, marsRover.Execute("L"));
+        Assert.Equal(output, marsRover.Execute(command));
     }
 }
