@@ -15,10 +15,29 @@ public class MarsRover
     {
         foreach (var symbol in command)
         {
-            TurnLeft();
+            if (symbol.Equals('R'))
+            {
+                TurnRight();
+            }
+
+            if (symbol.Equals('L'))
+            {
+                TurnLeft();
+            }
         }
 
         return $"0:0:{Direction}";
+    }
+
+    private void TurnRight()
+    {
+        Direction = Direction switch
+        {
+            "N" => "E",
+            "E" => "S",
+            "S" => "W",
+            _ => "N"
+        };
     }
 
     private void TurnLeft()
