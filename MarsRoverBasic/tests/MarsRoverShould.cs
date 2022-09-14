@@ -5,18 +5,17 @@ namespace MarsRoverBasic.tests;
 public class MarsRoverShould
 {
     private readonly MarsRover _marsRover;
-    private readonly Grid _grid;
 
     public MarsRoverShould()
     {
-        _grid = new Grid(10);
-        _marsRover = new MarsRover(_grid);
+        var grid = new Grid(10);
+        _marsRover = new MarsRover(grid);
     }
 
     [Fact]
     public void Return_Initial_Orientation_When_Command_Is_Empty_String()
     {
-        var expectedOutput = "0:0:N";
+        const string expectedOutput = "0:0:N";
         Assert.Equal(expectedOutput, _marsRover.Execute(string.Empty));
     }
 
@@ -37,26 +36,20 @@ public class MarsRoverShould
     {   
         Assert.Equal(output, _marsRover.Execute(command));
     }
-
-    [Fact]
-    public void Move_One_Field_Up_When_Only_One_M_Command()
+    
+    [Theory]
+    [InlineData("0:1:N", "M")]
+    [InlineData("0:2:N", "MM")]
+    public void move_Correctly_In_The_North_Direction(string expectedOutput, string command)
     {
-        var expectedOutput = "0:1:N";
-        Assert.Equal(expectedOutput, _marsRover.Execute("M"));
-    }
-
-    [Fact]
-    public void Move_Two_Fields_Up_When_Mm_Command()
-    {
-        var expectedOutput = "0:2:N";
-        Assert.Equal(expectedOutput, _marsRover.Execute("MM"));
+        Assert.Equal(expectedOutput, _marsRover.Execute(command));
     }
 
     [Fact]
     public void Return_to_0_Position_When_Moved_Outside_Of_Grid_Size()
     {
-        var expectedOutput = "0:0:N";
-        var commands = "MMMMMMMMMM";
+        const string expectedOutput = "0:0:N";
+        const string commands = "MMMMMMMMMM";
         Assert.Equal(expectedOutput, _marsRover.Execute(commands));
     }
 
