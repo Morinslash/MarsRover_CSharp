@@ -12,8 +12,7 @@ public class CompassShould
     public void Change_To_Proper_Left_When_Turning(string startDirection, string newDirection)
     {
         var compass = new Compass(startDirection);
-        compass.TurnLeft();
-        Assert.Equal(newDirection, compass.Direction);
+        Assert.Equal(newDirection, compass.TurnLeft().Direction);
     }
     
     [Theory]
@@ -24,8 +23,7 @@ public class CompassShould
     public void Change_To_Proper_Right_When_Turning(string startDierection, string newDirection)
     {
         var compass = new Compass(startDierection);
-        compass.TurnRight();
-        Assert.Equal(newDirection, compass.Direction);
+        Assert.Equal(newDirection, compass.TurnRight().Direction);
     }
     
     

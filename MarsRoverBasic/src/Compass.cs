@@ -7,27 +7,21 @@ public class Compass
         Direction = direction;
     }
 
-    public string Direction { get; private set; }
+    public string Direction { get; }
 
-    public void TurnRight()
+    public Compass TurnRight() => Direction switch
     {
-        Direction = Direction switch
+        "N" => new Compass("E"),
+        "E" => new Compass("S"),
+        "S" => new Compass("W"),
+        _ => new Compass("N")
+    };
+
+    public Compass TurnLeft() => Direction switch
         {
-            "N" => "E",
-            "E" => "S",
-            "S" => "W",
-            _ => "N"
+            "N" => new Compass("W"),
+            "W" => new Compass("S"),
+            "S" => new Compass("E"),
+            _ => new Compass("N")
         };
     }
-
-    public void TurnLeft()
-    {
-        Direction = Direction switch
-        {
-            "N" => "W",
-            "W" => "S",
-            "S" => "E",
-            _ => "N"
-        };
-    }
-}

@@ -2,28 +2,33 @@ namespace MarsRoverBasic;
 
 public class MarsRover
 {
-    private readonly Compass _compass;
+    private Compass _compass;
 
     public MarsRover()
     {
         _compass = new Compass("N");
     }
 
-    public string Execute(string command)
+    public string Execute(string commands)
     {
-        foreach (var symbol in command)
+        foreach (var command in commands)
         {
-            if (symbol.Equals('L'))
-            {
-                _compass.TurnLeft();
-            }
-
-            if (symbol.Equals('R'))
-            {
-                _compass.TurnRight();
-            }
+            Process(command);
         }
 
         return $"0:0:{_compass.Direction}";
+    }
+
+    private void Process(char command)
+    {
+        if (command.Equals('L'))
+        {
+            _compass = _compass.TurnLeft();
+        }
+
+        if (command.Equals('R'))
+        {
+            _compass = _compass.TurnRight();
+        }
     }
 }
