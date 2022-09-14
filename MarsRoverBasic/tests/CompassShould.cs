@@ -25,6 +25,4 @@ public class CompassShould
         var compass = new Compass(startDierection);
         Assert.Equal(newDirection, compass.TurnRight().Direction);
     }
-    
-    
 }

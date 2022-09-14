@@ -5,10 +5,12 @@ namespace MarsRoverBasic.tests;
 public class MarsRoverShould
 {
     private readonly MarsRover _marsRover;
+    private readonly Grid _grid;
 
     public MarsRoverShould()
     {
-        _marsRover = new MarsRover();
+        _grid = new Grid(10);
+        _marsRover = new MarsRover(_grid);
     }
 
     [Fact]
@@ -35,4 +37,27 @@ public class MarsRoverShould
     {   
         Assert.Equal(output, _marsRover.Execute(command));
     }
+
+    [Fact]
+    public void Move_One_Field_Up_When_Only_One_M_Command()
+    {
+        var expectedOutput = "0:1:N";
+        Assert.Equal(expectedOutput, _marsRover.Execute("M"));
+    }
+
+    [Fact]
+    public void Move_Two_Fields_Up_When_Mm_Command()
+    {
+        var expectedOutput = "0:2:N";
+        Assert.Equal(expectedOutput, _marsRover.Execute("MM"));
+    }
+
+    [Fact]
+    public void Return_to_0_Position_When_Moved_Outside_Of_Grid_Size()
+    {
+        var expectedOutput = "0:0:N";
+        var commands = "MMMMMMMMMM";
+        Assert.Equal(expectedOutput, _marsRover.Execute(commands));
+    }
+
 }
