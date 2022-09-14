@@ -4,11 +4,29 @@ namespace MarsRoverBasic.tests;
 
 public class CompassShould
 {
-    [Fact]
-    public void Change_To_East_On_Turn_Right_When_Facing_North()
+    [Theory]
+    [InlineData("N", "W")]
+    [InlineData("W", "S")]
+    [InlineData("S", "E")]
+    [InlineData("E", "N")]
+    public void Change_To_Proper_Left_When_Turning(string startDirection, string newDirection)
     {
-        var compass = new Compass("N");
+        var compass = new Compass(startDirection);
         compass.TurnLeft();
-        Assert.Equal("W", compass.Direction);
+        Assert.Equal(newDirection, compass.Direction);
     }
+    
+    [Theory]
+    [InlineData("N", "E")]
+    [InlineData("E", "S")]
+    [InlineData("S", "W")]
+    [InlineData("W", "N")]
+    public void Change_To_Proper_Right_When_Turning(string startDierection, string newDirection)
+    {
+        var compass = new Compass(startDierection);
+        compass.TurnRight();
+        Assert.Equal(newDirection, compass.Direction);
+    }
+    
+    
 }
