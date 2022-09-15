@@ -40,16 +40,34 @@ public class MarsRoverShould
     [Theory]
     [InlineData("0:1:N", "M")]
     [InlineData("0:2:N", "MM")]
-    public void move_Correctly_In_The_North_Direction(string expectedOutput, string command)
+    [InlineData("0:3:N", "MMM")]
+    public void Move_Correctly_In_The_North_Direction(string expectedOutput, string command)
     {
         Assert.Equal(expectedOutput, _marsRover.Execute(command));
     }
 
     [Fact]
-    public void Return_to_0_Position_When_Moved_Outside_Of_Grid_Size()
+    public void Return_to_X_0_Position_When_Moved_Outside_Of_Grid_Size_In_NorthDirection()
     {
         const string expectedOutput = "0:0:N";
         const string commands = "MMMMMMMMMM";
+        Assert.Equal(expectedOutput, _marsRover.Execute(commands));
+    }
+
+    [Theory]
+    [InlineData("1:0:E", "RM")]
+    [InlineData("2:0:E", "RMM")]
+    [InlineData("3:0:E", "RMMM")]
+    public void Move_Correctly_In_The_South_Direction(string expectedOutput, string command)
+    {   
+        Assert.Equal(expectedOutput, _marsRover.Execute(command));
+    }
+    
+    [Fact]
+    public void Return_to_Y_0_Position_When_Moved_Outside_Of_Grid_Size_In_EastDirection()
+    {
+        const string expectedOutput = "0:0:E";
+        const string commands = "RMMMMMMMMMM";
         Assert.Equal(expectedOutput, _marsRover.Execute(commands));
     }
 
