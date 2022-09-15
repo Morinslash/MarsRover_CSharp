@@ -14,6 +14,15 @@ public class Propulsion
             return coordinates with { Y = grid.Wrap(coordinates.Y + 1) };
         }
 
+        if (compass.Direction.Equals("S"))
+        {
+            return coordinates with { Y = grid.Wrap(coordinates.Y - 1) };
+        }
+        if (compass.Direction.Equals("W"))
+        {
+            return coordinates with { X = grid.Wrap(coordinates.X - 1) };
+        }
+
         return coordinates;
     }
 }
