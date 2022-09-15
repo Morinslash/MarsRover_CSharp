@@ -9,5 +9,5 @@ public class Grid
 
     private int Size { get; }
 
-    public int Wrap(int value) => value % Size;
+    public int Wrap(int value) => value < 0 ? Size - 1 : value % Size;
 }
