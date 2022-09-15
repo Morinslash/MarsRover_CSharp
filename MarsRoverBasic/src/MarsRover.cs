@@ -29,19 +29,17 @@ public class MarsRover
 
     private void Process(char command)
     {
-        if (command.Equals('L'))
+        switch (command)
         {
-            _compass = _compass.TurnLeft();
-        }
-
-        if (command.Equals('R'))
-        {
-            _compass = _compass.TurnRight();
-        }
-
-        if (command.Equals('M'))
-        {
-            _coordinates = _propulsion.Move(_coordinates, _compass, _grid);
+            case 'L':
+                _compass = _compass.TurnLeft();
+                break;
+            case 'R':
+                _compass = _compass.TurnRight();
+                break;
+            case 'M':
+                _coordinates = _propulsion.Move(_coordinates, _compass, _grid);
+                break;
         }
     }
 }
