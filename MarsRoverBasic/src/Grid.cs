@@ -6,7 +6,8 @@ public class Grid
     {
         Size = size;
     }
+
     private int Size { get; }
 
     public int Wrap(int value) => value % Size;
-    }
+}
