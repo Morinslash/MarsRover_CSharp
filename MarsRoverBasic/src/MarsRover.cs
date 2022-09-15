@@ -5,13 +5,13 @@ public class MarsRover
     private Compass _compass;
     private Coordinates _coordinates;
     private Grid WorldGrid { get; init; }
-    public string NavigationOutput => $"{_coordinates.X}:{_coordinates.Y}:{_compass.Direction}";
+    private string NavigationOutput => $"{_coordinates.X}:{_coordinates.Y}:{_compass.Direction}";
 
     public MarsRover(Grid worldGrid)
     {
-        this.WorldGrid = worldGrid;
+        WorldGrid = worldGrid;
         _compass = new Compass("N");
-        _coordinates = new Coordinates(0, 0, worldGrid.Size);
+        _coordinates = new Coordinates { Y = 0, X = 0};
     }
 
     public string Execute(string commands)
@@ -41,11 +41,11 @@ public class MarsRover
         {
             if (_compass.Direction.Equals("E"))
             {
-                _coordinates = new(_coordinates.Y, _coordinates.X + 1, WorldGrid.Size);
+                _coordinates = _coordinates with { X = WorldGrid.Wrap(_coordinates.X + 1) };
             }
             else
             {
-                _coordinates = new(_coordinates.Y + 1, _coordinates.X, WorldGrid.Size);
+                _coordinates = _coordinates with { Y = WorldGrid.Wrap(_coordinates.Y + 1) };
             }
         }
     }

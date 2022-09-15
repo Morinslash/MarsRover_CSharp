@@ -1,14 +1,9 @@
 namespace MarsRoverBasic;
 
-public class Coordinates
+public record Coordinates
 {
-    public readonly int Y;
-    public readonly int X;
-    private readonly int _worldGridSize;
+    public int Y { get; init; }
 
-    public Coordinates(int y, int x, int worldGridSize)
-    {
-        Y = y % worldGridSize;
-        X = x % worldGridSize;
-    }
+    public int X { get; init; }
+
 }
