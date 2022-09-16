@@ -1,3 +1,5 @@
+using MarsRoverBasic.NavigationModule;
+
 namespace MarsRoverBasic;
 
 public class Grid

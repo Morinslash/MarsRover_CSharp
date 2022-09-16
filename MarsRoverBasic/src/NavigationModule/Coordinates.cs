@@ -1,4 +1,4 @@
-namespace MarsRoverBasic;
+namespace MarsRoverBasic.NavigationModule;
 
 public record Coordinates
 {

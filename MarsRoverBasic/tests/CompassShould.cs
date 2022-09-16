@@ -1,3 +1,5 @@
+using MarsRoverBasic.NavigationModule;
+using MarsRoverBasic.NavigationModule.Directions;
 using Xunit;
 
 namespace MarsRoverBasic.tests;
@@ -5,36 +7,56 @@ namespace MarsRoverBasic.tests;
 public class CompassShould
 {
     [Theory]
-    [InlineData("N", "W")]
-    [InlineData("W", "S")]
-    [InlineData("S", "E")]
-    [InlineData("E", "N")]
-    public void Change_To_Proper_Left_When_Turning(string startDirection, string newDirection)
+    [MemberData(nameof(LeftTurn))]
+    public void Change_To_Proper_Left_When_Turning(Direction startDirection, string newDirection)
     {
         var compass = new Compass(startDirection);
-        Assert.Equal(newDirection, compass.TurnLeft().Direction);
-    }
-    
-    [Theory]
-    [InlineData("N", "E")]
-    [InlineData("E", "S")]
-    [InlineData("S", "W")]
-    [InlineData("W", "N")]
-    public void Change_To_Proper_Right_When_Turning(string startDierection, string newDirection)
-    {
-        var compass = new Compass(startDierection);
-        Assert.Equal(newDirection, compass.TurnRight().Direction);
+        compass.TurnLeft();
+        Assert.Equal(newDirection, compass.Direction);
     }
 
+    public static IEnumerable<object[]> LeftTurn =>
+        new List<object[]>
+        {
+            new object[] { new North(), "W" },
+            new object[] { new West(), "S" },
+            new object[] { new South(), "E" },
+            new object[] { new East(), "N" },
+        };
+
     [Theory]
-    [InlineData("N", 0, 1)]
-    [InlineData("S", 0, -1)]
-    [InlineData("E", 1, 0)]
-    [InlineData("W", -1, 0)]
-    public void Return_Up_Vector_If_Heading_North(string direction, int x, int y)
+    [MemberData(nameof(RightTurn))]
+    public void Change_To_Proper_Right_When_Turning(Direction startDierection, string newDirection)
     {
-        var expected = new Coordinates { X = x, Y = y };
-        var compass = new Compass(direction);
-        Assert.Equal(expected, compass.GetMoveVector());
+        var compass = new Compass(startDierection);
+        compass.TurnRight();
+        Assert.Equal(newDirection, compass.Direction);
     }
+
+    public static IEnumerable<object[]> RightTurn =>
+        new List<object[]>
+        {
+            new object[] { new North(), "E" },
+            new object[] { new West(), "N" },
+            new object[] { new South(), "W" },
+            new object[] { new East(), "S" },
+        };
+
+
+    [Theory]
+    [MemberData(nameof(Vector))]
+    public void Return_Up_Vector_If_Heading_North(Direction direction, Coordinates vector)
+    {
+        var compass = new Compass(direction);
+        Assert.Equal(vector, compass.GetMoveVector());
+    }
+
+    public static IEnumerable<object[]> Vector =>
+        new List<object[]>
+        {
+            new object[] { new North(), new Coordinates { X = 0, Y = 1 } },
+            new object[] { new West(), new Coordinates { X = -1, Y = 0 } },
+            new object[] { new South(), new Coordinates { X = 0, Y = -1 } },
+            new object[] { new East(), new Coordinates { X = 1, Y = 0 } },
+        };
 }

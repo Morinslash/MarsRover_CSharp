@@ -1,3 +1,6 @@
+using MarsRoverBasic.NavigationModule;
+using MarsRoverBasic.NavigationModule.Directions;
+
 namespace MarsRoverBasic;
 
 public class MarsRover
@@ -7,7 +10,7 @@ public class MarsRover
 
     public MarsRover(Grid grid)
     {
-        var initialCompass = new Compass("N");
+        var initialCompass = new Compass(new North());
         var initialCoordinates = new Coordinates { Y = 0, X = 0 };
         _navigation = new Navigation(initialCompass, initialCoordinates, grid);
         _propulsion = new Propulsion();
@@ -29,10 +32,10 @@ public class MarsRover
         switch (command)
         {
             case 'L':
-                _navigation.Set(_navigation.TurnLeft());
+                _navigation.TurnLeft();
                 break;
             case 'R':
-                _navigation.Set(_navigation.TurnRight());
+               _navigation.TurnRight();
                 break;
             case 'M':
                 _navigation.Set(_propulsion.Move(_navigation.Coordinates, _navigation.GetMoveVector()));

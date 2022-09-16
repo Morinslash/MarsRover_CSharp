@@ -1,8 +1,8 @@
-namespace MarsRoverBasic;
+namespace MarsRoverBasic.NavigationModule;
 
 public class Navigation
 {
-    private Compass _compass;
+    private readonly Compass _compass;
     private readonly Grid _grid;
     public Coordinates Coordinates { get; private set; }
 
@@ -14,18 +14,13 @@ public class Navigation
         Coordinates = coordinates;
         _grid = grid;
     }
-
-    public void Set(Compass compass)
-    {
-        _compass = compass;
-    }
-
+    
     public void Set(Coordinates coordinates)
     {
         Coordinates = _grid.Wrap(coordinates);
     }
 
-    public Compass TurnLeft() => _compass.TurnLeft();
-    public Compass TurnRight() => _compass.TurnRight();
+    public void TurnLeft() => _compass.TurnLeft();
+    public void TurnRight() => _compass.TurnRight();
     public Coordinates GetMoveVector() => _compass.GetMoveVector();
 }

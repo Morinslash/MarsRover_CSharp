@@ -1,3 +1,4 @@
+using MarsRoverBasic.NavigationModule;
 using Xunit;
 
 namespace MarsRoverBasic.tests;
