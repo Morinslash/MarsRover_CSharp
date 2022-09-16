@@ -25,4 +25,16 @@ public class CompassShould
         var compass = new Compass(startDierection);
         Assert.Equal(newDirection, compass.TurnRight().Direction);
     }
+
+    [Theory]
+    [InlineData("N", 0, 1)]
+    [InlineData("S", 0, -1)]
+    [InlineData("E", 1, 0)]
+    [InlineData("W", -1, 0)]
+    public void Return_Up_Vector_If_Heading_North(string direction, int x, int y)
+    {
+        var expected = new Coordinates { X = x, Y = y };
+        var compass = new Compass(direction);
+        Assert.Equal(expected, compass.GetMoveVector());
+    }
 }

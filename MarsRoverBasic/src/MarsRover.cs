@@ -38,7 +38,7 @@ public class MarsRover
                 _compass = _compass.TurnRight();
                 break;
             case 'M':
-                _coordinates = _propulsion.Move(_coordinates, _compass, _grid);
+                _coordinates = _propulsion.Move(_coordinates, _compass.GetMoveVector(), _grid);
                 break;
         }
     }

@@ -2,12 +2,23 @@ namespace MarsRoverBasic;
 
 public class Compass
 {
+    private readonly Dictionary<string, Coordinates> _vectorMap;
+        
+    public string Direction { get; }
+
+
     public Compass(string direction)
     {
         Direction = direction;
+        _vectorMap = new Dictionary<string, Coordinates>()
+        {
+            { "N", new Coordinates { X = 0, Y = 1 } },
+            { "S", new Coordinates { X = 0, Y = -1 } },
+            { "E", new Coordinates { X = 1, Y = 0 } },
+            { "W", new Coordinates { X = -1, Y = 0 } },
+        };
     }
 
-    public string Direction { get; }
 
     public Compass TurnRight() => Direction switch
     {
@@ -24,4 +35,10 @@ public class Compass
             "S" => new Compass("E"),
             _ => new Compass("N")
         };
+
+    public Coordinates GetMoveVector()
+    {
+        return _vectorMap.GetValueOrDefault(Direction) ?? throw new InvalidOperationException();
     }
+
+}
