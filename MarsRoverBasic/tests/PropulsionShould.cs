@@ -8,9 +8,9 @@ public class PropulsionShould
     [Fact]
     public void Return_New_Coordinates_That_Results_From_Adding_Move_Vector_Up()
     {
-        var expected = new Coordinates { X = 5, Y = 6 };
-        var origin = new Coordinates { X = 5, Y = 5 };
-        var moveVector = new Coordinates { X = 0, Y = 1 };
+        var expected = new Coordinates { Longitude = 5, Latitude = 6 };
+        var origin = new Coordinates { Longitude = 5, Latitude = 5 };
+        var moveVector = new Coordinates { Longitude = 0, Latitude = 1 };
         var grid = new Grid(10);
 
         var propulsion = new Propulsion();
@@ -23,9 +23,9 @@ public class PropulsionShould
     [Fact]
     public void Return_New_Coordinates_That_Results_From_Adding_Move_Vector_Down()
     {
-        var expected = new Coordinates { X = 5, Y = 4 };
-        var origin = new Coordinates { X = 5, Y = 5 };
-        var moveVector = new Coordinates { X = 0, Y = -1 };
+        var expected = new Coordinates { Longitude = 5, Latitude = 4 };
+        var origin = new Coordinates { Longitude = 5, Latitude = 5 };
+        var moveVector = new Coordinates { Longitude = 0, Latitude = -1 };
         var grid = new Grid(10);
 
         var propulsion = new Propulsion();
@@ -38,9 +38,9 @@ public class PropulsionShould
     [Fact]
     public void Return_New_Coordinates_That_Results_From_Adding_Move_Vector_Right()
     {
-        var expected = new Coordinates { X = 6, Y = 5 };
-        var origin = new Coordinates { X = 5, Y = 5 };
-        var moveVector = new Coordinates { X = 1, Y = 0 };
+        var expected = new Coordinates { Longitude = 6, Latitude = 5 };
+        var origin = new Coordinates { Longitude = 5, Latitude = 5 };
+        var moveVector = new Coordinates { Longitude = 1, Latitude = 0 };
         var grid = new Grid(10);
 
         var propulsion = new Propulsion();
@@ -53,9 +53,9 @@ public class PropulsionShould
     [Fact]
     public void Return_New_Coordinates_That_Results_From_Adding_Move_Vector_Left()
     {
-        var expected = new Coordinates { X = 4, Y = 5 };
-        var origin = new Coordinates { X = 5, Y = 5 };
-        var moveVector = new Coordinates { X = -1, Y = 0 };
+        var expected = new Coordinates { Longitude = 4, Latitude = 5 };
+        var origin = new Coordinates { Longitude = 5, Latitude = 5 };
+        var moveVector = new Coordinates { Longitude = -1, Latitude = 0 };
         var grid = new Grid(10);
 
         var propulsion = new Propulsion();

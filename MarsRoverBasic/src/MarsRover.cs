@@ -11,7 +11,7 @@ public class MarsRover
     public MarsRover(Grid grid)
     {
         var initialCompass = new Compass(new North());
-        var initialCoordinates = new Coordinates { Y = 0, X = 0 };
+        var initialCoordinates = new Coordinates { Latitude = 0, Longitude = 0 };
         _navigation = new Navigation(initialCompass, initialCoordinates, grid);
         _propulsion = new Propulsion();
     }

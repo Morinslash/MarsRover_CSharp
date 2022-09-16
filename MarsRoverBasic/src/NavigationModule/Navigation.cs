@@ -6,7 +6,7 @@ public class Navigation
     private readonly Grid _grid;
     public Coordinates Coordinates { get; private set; }
 
-    public string NavigationOutput => $"{Coordinates.X}:{Coordinates.Y}:{_compass.Direction}";
+    public string NavigationOutput => $"{Coordinates.Longitude}:{Coordinates.Latitude}:{_compass.Direction}";
 
     public Navigation(Compass compass, Coordinates coordinates, Grid grid)
     {

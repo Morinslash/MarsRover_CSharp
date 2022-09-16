@@ -15,7 +15,7 @@ public class Grid
 
     public Coordinates Wrap(Coordinates coordinates) => new()
     {
-        X = Wrap(coordinates.X),
-        Y = Wrap(coordinates.Y)
+        Longitude = Wrap(coordinates.Longitude),
+        Latitude = Wrap(coordinates.Latitude)
     };
 }

@@ -54,9 +54,9 @@ public class CompassShould
     public static IEnumerable<object[]> Vector =>
         new List<object[]>
         {
-            new object[] { new North(), new Coordinates { X = 0, Y = 1 } },
-            new object[] { new West(), new Coordinates { X = -1, Y = 0 } },
-            new object[] { new South(), new Coordinates { X = 0, Y = -1 } },
-            new object[] { new East(), new Coordinates { X = 1, Y = 0 } },
+            new object[] { new North(), new Coordinates { Longitude = 0, Latitude = 1 } },
+            new object[] { new West(), new Coordinates { Longitude = -1, Latitude = 0 } },
+            new object[] { new South(), new Coordinates { Longitude = 0, Latitude = -1 } },
+            new object[] { new East(), new Coordinates { Longitude = 1, Latitude = 0 } },
         };
 }
