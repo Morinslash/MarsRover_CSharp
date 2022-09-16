@@ -2,27 +2,13 @@ namespace MarsRoverBasic;
 
 public class Propulsion
 {
-    public Coordinates Move(Coordinates coordinates, Compass compass, Grid grid)
-    {
-        if (compass.Direction.Equals("E"))
+    public Coordinates Move(Coordinates coordinates, Compass compass, Grid grid) =>
+        compass.Direction switch
         {
-            return coordinates with { X = grid.Wrap(coordinates.X + 1) };
-        }
-
-        if (compass.Direction.Equals("N"))
-        {
-            return coordinates with { Y = grid.Wrap(coordinates.Y + 1) };
-        }
-
-        if (compass.Direction.Equals("S"))
-        {
-            return coordinates with { Y = grid.Wrap(coordinates.Y - 1) };
-        }
-        if (compass.Direction.Equals("W"))
-        {
-            return coordinates with { X = grid.Wrap(coordinates.X - 1) };
-        }
-
-        return coordinates;
-    }
+            "E" => coordinates with { X = grid.Wrap(coordinates.X + 1) },
+            "N" => coordinates with { Y = grid.Wrap(coordinates.Y + 1) },
+            "S" => coordinates with { Y = grid.Wrap(coordinates.Y - 1) },
+            "W" => coordinates with { X = grid.Wrap(coordinates.X - 1) },
+            _ => coordinates
+        };
 }

@@ -47,7 +47,7 @@ public class MarsRoverShould
     }
 
     [Fact]
-    public void Return_to_X_0_Position_When_Moved_Outside_Of_Grid_Size_In_NorthDirection()
+    public void Return_to_0_0_Position_When_Moved_Outside_Of_Grid_Size_In_NorthDirection()
     {
         const string expectedOutput = "0:0:N";
         const string commands = "MMMMMMMMMM";
@@ -58,17 +58,50 @@ public class MarsRoverShould
     [InlineData("1:0:E", "RM")]
     [InlineData("2:0:E", "RMM")]
     [InlineData("3:0:E", "RMMM")]
+    public void Move_Correctly_In_The_East_Direction(string expectedOutput, string command)
+    {   
+        Assert.Equal(expectedOutput, _marsRover.Execute(command));
+    }
+    
+    [Fact]
+    public void Return_to_0_0_Position_When_Moved_Outside_Of_Grid_Size_In_EastDirection()
+    {
+        const string expectedOutput = "0:0:E";
+        const string commands = "RMMMMMMMMMM";
+        Assert.Equal(expectedOutput, _marsRover.Execute(commands));
+    }
+    
+    [Theory]
+    [InlineData("0:9:S", "RRM")]
+    [InlineData("0:8:S", "RRMM")]
+    [InlineData("0:7:S", "RRMMM")]
     public void Move_Correctly_In_The_South_Direction(string expectedOutput, string command)
     {   
         Assert.Equal(expectedOutput, _marsRover.Execute(command));
     }
     
     [Fact]
-    public void Return_to_Y_0_Position_When_Moved_Outside_Of_Grid_Size_In_EastDirection()
+    public void Return_to_0_0_Position_When_Moved_Outside_Of_Grid_Size_In_South_Direction()
     {
-        const string expectedOutput = "0:0:E";
-        const string commands = "RMMMMMMMMMM";
+        const string expectedOutput = "0:0:S";
+        const string commands = "RRMMMMMMMMMM";
         Assert.Equal(expectedOutput, _marsRover.Execute(commands));
     }
-
+    
+    [Theory]
+    [InlineData("9:0:W", "LM")]
+    [InlineData("8:0:W", "LMM")]
+    [InlineData("7:0:W", "LMMM")]
+    public void Move_Correctly_In_The_West_Direction(string expectedOutput, string command)
+    {   
+        Assert.Equal(expectedOutput, _marsRover.Execute(command));
+    }
+    
+    [Fact]
+    public void Return_to_0_0_Position_When_Moved_Outside_Of_Grid_Size_In_West_Direction()
+    {
+        const string expectedOutput = "0:0:W";
+        const string commands = "LMMMMMMMMMM";
+        Assert.Equal(expectedOutput, _marsRover.Execute(commands));
+    }
 }
