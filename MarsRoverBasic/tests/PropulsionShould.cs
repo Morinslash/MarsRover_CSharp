@@ -14,7 +14,7 @@ public class PropulsionShould
 
         var propulsion = new Propulsion();
 
-        var newCoordinates = propulsion.Move(origin, moveVector, grid);
+        var newCoordinates = propulsion.Move(origin, moveVector);
 
         Assert.Equal(expected, newCoordinates);
     }
@@ -29,7 +29,7 @@ public class PropulsionShould
 
         var propulsion = new Propulsion();
 
-        var newCoordinates = propulsion.Move(origin, moveVector, grid);
+        var newCoordinates = propulsion.Move(origin, moveVector);
 
         Assert.Equal(expected, newCoordinates);
     }
@@ -44,7 +44,7 @@ public class PropulsionShould
 
         var propulsion = new Propulsion();
 
-        var newCoordinates = propulsion.Move(origin, moveVector, grid);
+        var newCoordinates = propulsion.Move(origin, moveVector);
 
         Assert.Equal(expected, newCoordinates);
     }
@@ -59,7 +59,7 @@ public class PropulsionShould
 
         var propulsion = new Propulsion();
 
-        var newCoordinates = propulsion.Move(origin, moveVector, grid);
+        var newCoordinates = propulsion.Move(origin, moveVector);
 
         Assert.Equal(expected, newCoordinates);
     }

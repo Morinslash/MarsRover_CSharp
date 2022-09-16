@@ -2,14 +2,14 @@ namespace MarsRoverBasic;
 
 public class MarsRover
 {
-    private readonly Grid _grid;
     private readonly Propulsion _propulsion;
     private readonly Navigation _navigation;
 
     public MarsRover(Grid grid)
     {
-        _grid = grid;
-        _navigation = new Navigation(new Compass("N"), new Coordinates { Y = 0, X = 0 });
+        var initialCompass = new Compass("N");
+        var initialCoordinates = new Coordinates { Y = 0, X = 0 };
+        _navigation = new Navigation(initialCompass, initialCoordinates, grid);
         _propulsion = new Propulsion();
     }
 
@@ -35,8 +35,10 @@ public class MarsRover
                 _navigation.Set(_navigation.TurnRight());
                 break;
             case 'M':
-                _navigation.Set(_propulsion.Move(_navigation.Coordinates, _navigation.GetMoveVector(), _grid));
+                _navigation.Set(_propulsion.Move(_navigation.Coordinates, _navigation.GetMoveVector()));
                 break;
+            default:
+                throw new InvalidOperationException();
         }
     }
 }
