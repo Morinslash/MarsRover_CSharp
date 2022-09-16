@@ -4,15 +4,12 @@ public class MarsRover
 {
     private readonly Grid _grid;
     private readonly Propulsion _propulsion;
-    private Compass _compass;
-    private Coordinates _coordinates;
-    private string NavigationOutput => $"{_coordinates.X}:{_coordinates.Y}:{_compass.Direction}";
+    private readonly Navigation _navigation;
 
     public MarsRover(Grid grid)
     {
         _grid = grid;
-        _compass = new Compass("N");
-        _coordinates = new Coordinates { Y = 0, X = 0 };
+        _navigation = new Navigation(new Compass("N"), new Coordinates { Y = 0, X = 0 });
         _propulsion = new Propulsion();
     }
 
@@ -23,7 +20,7 @@ public class MarsRover
             Process(command);
         }
 
-        return NavigationOutput;
+        return _navigation.NavigationOutput;
     }
 
 
@@ -32,13 +29,13 @@ public class MarsRover
         switch (command)
         {
             case 'L':
-                _compass = _compass.TurnLeft();
+                _navigation.Set(_navigation.TurnLeft());
                 break;
             case 'R':
-                _compass = _compass.TurnRight();
+                _navigation.Set(_navigation.TurnRight());
                 break;
             case 'M':
-                _coordinates = _propulsion.Move(_coordinates, _compass.GetMoveVector(), _grid);
+                _navigation.Set(_propulsion.Move(_navigation.Coordinates, _navigation.GetMoveVector(), _grid));
                 break;
         }
     }
