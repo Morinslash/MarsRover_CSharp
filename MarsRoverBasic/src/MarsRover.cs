@@ -1,3 +1,4 @@
+using MarsRoverBasic.CommModule;
 using MarsRoverBasic.NavigationModule;
 using MarsRoverBasic.NavigationModule.Directions;
 
@@ -5,43 +6,26 @@ namespace MarsRoverBasic;
 
 public class MarsRover
 {
-    private readonly Propulsion _propulsion;
     private readonly Navigation _navigation;
+    private readonly CommunicationModule _commModule;
+    public Propulsion Propulsion { get; } = new();
+    public Navigation Navigation => _navigation;
 
     public MarsRover(Grid grid)
     {
-        var initialCompass = new Compass(new North());
-        var initialCoordinates = new Coordinates { Latitude = 0, Longitude = 0 };
-        _navigation = new Navigation(initialCompass, initialCoordinates, grid);
-        _propulsion = new Propulsion();
+        Coordinates initialCoordinates = new(latitude: 0, longitude: 0);
+        Compass initialCompass = new(new North());
+        _commModule = new(this);
+        _navigation = new(initialCompass, initialCoordinates, grid);
     }
 
-    public string Execute(string commands)
+    public string Execute(string instructions)
     {
-        foreach (var command in commands)
+        if (!string.IsNullOrEmpty(instructions))
         {
-            Process(command);
+            _commModule.Translate(instructions).ForEach(com => com.Execute());
         }
 
         return _navigation.NavigationOutput;
-    }
-
-
-    private void Process(char command)
-    {
-        switch (command)
-        {
-            case 'L':
-                _navigation.TurnLeft();
-                break;
-            case 'R':
-               _navigation.TurnRight();
-                break;
-            case 'M':
-                _navigation.Set(_propulsion.Move(_navigation.Coordinates, _navigation.GetMoveVector()));
-                break;
-            default:
-                throw new InvalidOperationException();
-        }
     }
 }

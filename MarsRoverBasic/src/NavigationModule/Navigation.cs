@@ -11,8 +11,8 @@ public class Navigation
     public Navigation(Compass compass, Coordinates coordinates, Grid grid)
     {
         _compass = compass;
-        Coordinates = coordinates;
         _grid = grid;
+        Coordinates = coordinates;
     }
     
     public void Set(Coordinates coordinates)
