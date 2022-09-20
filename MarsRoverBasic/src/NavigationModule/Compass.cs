@@ -13,9 +13,14 @@ public class Compass
 
     public string Direction => _currentDirection.Symbol;
 
-    public void TurnRight() => _currentDirection = _currentDirection.Right;
+    public void TurnRight() => SetDirection(_currentDirection.Right);
 
-    public void TurnLeft() => _currentDirection = _currentDirection.Left;
+    public void TurnLeft() => SetDirection(_currentDirection.Left);
 
     public Coordinates GetMoveVector() => _currentDirection.Vector;
+
+    private void SetDirection(Direction value)
+    {
+        _currentDirection = value;
+    }
 }
