@@ -8,15 +8,14 @@ public class MarsRover
 {
     private readonly Navigation _navigation;
     private readonly CommunicationModule _commModule;
-    public Propulsion Propulsion { get; } = new();
     public Navigation Navigation => _navigation;
 
     public MarsRover(Grid grid)
     {
         Coordinates initialCoordinates = new(latitude: 0, longitude: 0);
         Compass initialCompass = new(new North());
-        _commModule = new(this);
         _navigation = new(initialCompass, initialCoordinates, grid);
+        _commModule = new(this);
     }
 
     public string Execute(string instructions)
