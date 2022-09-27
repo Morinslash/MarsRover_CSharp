@@ -13,6 +13,7 @@ public class TurnLeft : IRoverCommand
 
     public void Execute()
     {
-        _navigation.TurnLeft();
+        
+        _navigation.CurrentDirection.Left(_navigation);
     }
 }

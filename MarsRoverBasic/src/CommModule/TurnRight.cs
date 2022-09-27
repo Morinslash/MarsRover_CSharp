@@ -13,6 +13,6 @@ public class TurnRight : IRoverCommand
 
     public void Execute()
     {
-        _navigation.TurnRight();
+        _navigation.CurrentDirection.Right(_navigation);
     }
 }

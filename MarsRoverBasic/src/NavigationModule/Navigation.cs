@@ -5,7 +5,7 @@ namespace MarsRoverBasic.NavigationModule;
 public class Navigation
 {
     private readonly Grid _grid;
-    private Direction CurrentDirection { get; set; }
+    public Direction CurrentDirection { get; private set; }
     public Coordinates CurrentPosition { get; private set; }
 
     public string NavigationOutput => $"{CurrentPosition.Longitude}:{CurrentPosition.Latitude}:{CurrentDirection.Symbol}";
@@ -22,7 +22,10 @@ public class Navigation
         CurrentPosition = _grid.Wrap(coordinates);
     }
 
-    public void TurnLeft() => CurrentDirection = CurrentDirection.Left;
-    public void TurnRight() => CurrentDirection = CurrentDirection.Right;
+    public void Set(Direction newDirection)
+    {
+        CurrentDirection = newDirection;
+    }
+
     public Coordinates GetMoveVector() => CurrentDirection.Vector;
 }
