@@ -1,26 +1,28 @@
+using MarsRoverBasic.NavigationModule.Directions;
+
 namespace MarsRoverBasic.NavigationModule;
 
 public class Navigation
 {
-    private readonly Compass _compass;
     private readonly Grid _grid;
-    public Coordinates Coordinates { get; private set; }
+    private Direction CurrentDirection { get; set; }
+    public Coordinates CurrentPosition { get; private set; }
 
-    public string NavigationOutput => $"{Coordinates.Longitude}:{Coordinates.Latitude}:{_compass.Direction}";
+    public string NavigationOutput => $"{CurrentPosition.Longitude}:{CurrentPosition.Latitude}:{CurrentDirection.Symbol}";
 
-    public Navigation(Compass compass, Coordinates coordinates, Grid grid)
+    public Navigation(Direction currentDirection, Coordinates currentPosition, Grid grid)
     {
-        _compass = compass;
         _grid = grid;
-        Coordinates = coordinates;
+        CurrentDirection = currentDirection;
+        CurrentPosition = currentPosition;
     }
     
     public void Set(Coordinates coordinates)
     {
-        Coordinates = _grid.Wrap(coordinates);
+        CurrentPosition = _grid.Wrap(coordinates);
     }
 
-    public void TurnLeft() => _compass.TurnLeft();
-    public void TurnRight() => _compass.TurnRight();
-    public Coordinates GetMoveVector() => _compass.GetMoveVector();
+    public void TurnLeft() => CurrentDirection = CurrentDirection.Left;
+    public void TurnRight() => CurrentDirection = CurrentDirection.Right;
+    public Coordinates GetMoveVector() => CurrentDirection.Vector;
 }

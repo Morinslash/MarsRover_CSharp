@@ -13,7 +13,7 @@ public class Move : IRoverCommand
 
     public void Execute()
     {
-        var currentCoordinates = _navigation.Coordinates;
+        var currentCoordinates = _navigation.CurrentPosition;
         var moveVector = _navigation.GetMoveVector();
         Coordinates newCoordinates = new()
         {

@@ -6,16 +6,14 @@ namespace MarsRoverBasic;
 
 public class MarsRover
 {
-    private readonly Navigation _navigation;
     private readonly CommunicationModule _commModule;
-    public Navigation Navigation => _navigation;
+    public Navigation Navigation { get; }
 
     public MarsRover(Grid grid)
     {
         Coordinates initialCoordinates = new(latitude: 0, longitude: 0);
-        Compass initialCompass = new(new North());
-        _navigation = new(initialCompass, initialCoordinates, grid);
-        _commModule = new(this);
+        Navigation = new Navigation(new North(), initialCoordinates, grid);
+        _commModule = new CommunicationModule(this);
     }
 
     public string Execute(string instructions)
@@ -25,6 +23,6 @@ public class MarsRover
             _commModule.Translate(instructions).ForEach(com => com.Execute());
         }
 
-        return _navigation.NavigationOutput;
+        return Navigation.NavigationOutput;
     }
 }
