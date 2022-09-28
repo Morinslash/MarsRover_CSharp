@@ -1,7 +1,22 @@
+using MarsRoverBasic.NavigationModule;
+
 namespace MarsRoverBasic.CommModule;
 
-public interface IRoverCommand
+public abstract class RoverCommand
 {
-    void Execute();
-    void CanExecute();
+    protected readonly Navigation Navigation;
+
+    public RoverCommand(Navigation navigation)
+    {
+        Navigation = navigation;
+    }
+    public void CanExecute()
+    {
+        if (!Navigation.ObstacleDetected)
+        {
+            Execute();
+        }
+    }
+
+    protected abstract void Execute();
 }

@@ -2,26 +2,15 @@ using MarsRoverBasic.NavigationModule;
 
 namespace MarsRoverBasic.CommModule;
 
-public class TurnLeft : IRoverCommand
+public class TurnLeft : RoverCommand
 {
-    private readonly Navigation _navigation;
-
-    public TurnLeft(Navigation navigation)
+    public TurnLeft(Navigation navigation) : base(navigation)
     {
-        _navigation = navigation;
     }
 
-    public void Execute()
+    protected override void Execute()
     {
         
-        _navigation.CurrentDirection.Left(_navigation);
-    }
-
-    public void CanExecute()
-    {
-        if (!_navigation.ObstacleDetected)
-        {
-            Execute();
-        }
+        Navigation.CurrentDirection.Left(Navigation);
     }
 }

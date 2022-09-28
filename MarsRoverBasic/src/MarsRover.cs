@@ -23,7 +23,6 @@ public class MarsRover
             _commModule.Translate(instructions)
                 .ForEach(command => command.CanExecute());
         }
-
         return Navigation.NavigationOutput;
     }
 }

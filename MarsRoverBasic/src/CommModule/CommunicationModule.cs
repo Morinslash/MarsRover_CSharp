@@ -2,11 +2,11 @@ namespace MarsRoverBasic.CommModule;
 
 public class CommunicationModule
 {
-    private readonly Dictionary<char, Func<IRoverCommand>> _commandsMap;
+    private readonly Dictionary<char, Func<RoverCommand>> _commandsMap;
 
     public CommunicationModule(MarsRover marsRover)
     {
-        _commandsMap = new Dictionary<char, Func<IRoverCommand>>()
+        _commandsMap = new Dictionary<char, Func<RoverCommand>>()
         {
             { 'L',  () =>  new TurnLeft(marsRover.Navigation)},
             { 'R', () => new TurnRight(marsRover.Navigation)},
@@ -14,10 +14,9 @@ public class CommunicationModule
         };
     }
 
-    public List<IRoverCommand> Translate(string instructions)
-        => (string.IsNullOrEmpty(instructions) ? throw new InvalidOperationException() : 
-            instructions
-                .Select(c => _commandsMap.GetValueOrDefault(c))
-                .Select(f => f?.Invoke())
-                .ToList())!;
+    public List<RoverCommand> Translate(string instructions)
+        => instructions
+            .Select(c => _commandsMap.GetValueOrDefault(c))
+            .Select(f => f?.Invoke())
+            .ToList()!;
 }
