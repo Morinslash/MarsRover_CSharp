@@ -15,4 +15,12 @@ public class TurnRight : IRoverCommand
     {
         _navigation.CurrentDirection.Right(_navigation);
     }
+
+    public void CanExecute()
+    {
+        if (!_navigation.ObstacleDetected)
+        {
+            Execute();
+        }
+    }
 }

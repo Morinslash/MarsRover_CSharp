@@ -1,3 +1,4 @@
+using MarsRoverBasic.NavigationModule;
 using Xunit;
 
 namespace MarsRoverBasic.tests;
@@ -103,5 +104,20 @@ public class MarsRoverShould
         const string expectedOutput = "0:0:W";
         const string commands = "LMMMMMMMMMM";
         Assert.Equal(expectedOutput, _marsRover.Execute(commands));
+    }
+
+    [Theory]
+    [InlineData("o:0:0:N", 1, 0, "M")]
+    [InlineData("o:0:1:N", 2, 0, "MM")]
+    [InlineData("o:0:1:N", 2, 0, "MMM")]
+    [InlineData("1:1:E", 2, 0, "MRM")]
+    [InlineData("9:1:W", 2, 0, "MLM")]
+    public void Return_Obstacle_On_From_The_Last_Correct_Position(string expected, int latitude, int longitude, string command)
+    {
+        var obstaclesList = new List<Coordinates> { new(){ Latitude = latitude, Longitude = longitude }};
+        var grid = new Grid(10, obstaclesList);
+        var marsRover = new MarsRover(grid);
+
+        Assert.Equal(expected, marsRover.Execute(command));
     }
 }

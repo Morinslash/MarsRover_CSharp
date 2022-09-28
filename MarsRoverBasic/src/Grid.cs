@@ -4,9 +4,16 @@ namespace MarsRoverBasic;
 
 public class Grid
 {
+    private readonly List<Coordinates>? _obstacles;
+
     public Grid(int size)
     {
         Size = size;
+    }
+
+    public Grid(int size, List<Coordinates>? obstacles) : this(size)
+    {
+        _obstacles = obstacles;
     }
 
     private int Size { get; }
@@ -18,4 +25,6 @@ public class Grid
         Longitude = Wrap(coordinates.Longitude),
         Latitude = Wrap(coordinates.Latitude)
     };
+
+    public bool ObstacleExists(Coordinates coordinates) => _obstacles?.Contains(coordinates) ?? false;
 }

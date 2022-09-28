@@ -20,7 +20,8 @@ public class MarsRover
     {
         if (!string.IsNullOrEmpty(instructions))
         {
-            _commModule.Translate(instructions).ForEach(com => com.Execute());
+            _commModule.Translate(instructions)
+                .ForEach(command => command.CanExecute());
         }
 
         return Navigation.NavigationOutput;

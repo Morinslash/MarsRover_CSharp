@@ -16,6 +16,8 @@ public class CommunicationModule
 
     public List<IRoverCommand> Translate(string instructions)
         => (string.IsNullOrEmpty(instructions) ? throw new InvalidOperationException() : 
-            instructions.Select(c => _commandsMap.GetValueOrDefault(c))
-                .Select(f => f?.Invoke()).ToList())!;
+            instructions
+                .Select(c => _commandsMap.GetValueOrDefault(c))
+                .Select(f => f?.Invoke())
+                .ToList())!;
 }

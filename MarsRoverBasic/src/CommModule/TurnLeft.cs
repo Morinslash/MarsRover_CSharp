@@ -16,4 +16,12 @@ public class TurnLeft : IRoverCommand
         
         _navigation.CurrentDirection.Left(_navigation);
     }
+
+    public void CanExecute()
+    {
+        if (!_navigation.ObstacleDetected)
+        {
+            Execute();
+        }
+    }
 }
