@@ -10,7 +10,6 @@ public class TurnLeft : RoverCommand
 
     protected override void Execute()
     {
-        
         Navigation.CurrentDirection.Left(Navigation);
     }
 }

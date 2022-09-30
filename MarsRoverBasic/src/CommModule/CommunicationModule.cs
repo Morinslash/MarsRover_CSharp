@@ -8,15 +8,17 @@ public class CommunicationModule
     {
         _commandsMap = new Dictionary<char, Func<RoverCommand>>()
         {
-            { 'L',  () =>  new TurnLeft(marsRover.Navigation)},
-            { 'R', () => new TurnRight(marsRover.Navigation)},
-            { 'M',  () => new Move(marsRover.Navigation)}
+            { 'L',  () => new TurnLeft(marsRover.NavigationSystem) },
+            { 'R', () => new TurnRight(marsRover.NavigationSystem)},
+            { 'M',  () => new Move(marsRover.NavigationSystem)}
         };
     }
 
     public List<RoverCommand> Translate(string instructions)
-        => instructions
+    {
+        return instructions
             .Select(c => _commandsMap.GetValueOrDefault(c))
             .Select(f => f?.Invoke())
             .ToList()!;
+    }
 }
